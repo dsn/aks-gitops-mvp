@@ -24,6 +24,9 @@ jobs:
         with:
           tf_actions_version: 0.12.13
           tf_actions_subcommand: 'init'
+          tf_actions_working_dir: '.'
+          tf_actions_comment: true
+          args: '-backend-config="./backend.tfvars"'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
@@ -43,6 +46,9 @@ jobs:
         with:
           tf_actions_version: 0.12.13
           tf_actions_subcommand: 'apply'
+          tf_actions_working_dir: '.'
+          tf_actions_comment: true
+          args: '-var-file="./terraform.tfvars"'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}

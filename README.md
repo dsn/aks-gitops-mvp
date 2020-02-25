@@ -1,3 +1,5 @@
+![Terraform Apply](https://github.com/haisumb/aks-gitops-mvp/workflows/Terraform%20Apply/badge.svg?branch=master)
+
 Getting Started
 ===============
 

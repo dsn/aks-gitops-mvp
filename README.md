@@ -1,4 +1,6 @@
-![Terraform Apply](https://github.com/haisumb/aks-gitops-mvp/workflows/Terraform%20Apply/badge.svg?branch=master)
+![validate-centralus-production](https://github.com/haisumb/aks-gitops-mvp/workflows/validate-centralus-production/badge.svg)
+
+![apply-centralus-production](https://github.com/haisumb/aks-gitops-mvp/workflows/apply-centralus-production/badge.svg)
 
 Getting Started
 ===============

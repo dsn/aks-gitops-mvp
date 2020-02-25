@@ -1,4 +1,4 @@
-name: 'validate-production-centralus'
+name: 'production-centralus-validate'
 on:
   pull_request:
     paths:

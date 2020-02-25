@@ -1,4 +1,4 @@
-name: 'Terraform Validate'
+name: 'validate-centralus-production'
 on:
   pull_request:
     paths:

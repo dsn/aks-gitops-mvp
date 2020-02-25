@@ -80,5 +80,5 @@ variable "cluster_tags" {
 
 # @todo remove this
 variable "random" {
-  type = "string"
+  type = string
 }

@@ -48,12 +48,12 @@ variable "agent_vm_disk_size" {
   default     = 30
 }
 
-variable "service_principal_id" {
+variable "aks_service_principal_id" {
   type        = string
   description = "value of ARM_CLIENT_ID env var or service principal id"
 }
 
-variable "service_principal_secret" {
+variable "aks_service_principal_secret" {
   type        = string
   description = "value of ARM_CLIENT_SECRET env var. If you commit .tfvars file then don't put this in there. Use TF_VAR_service_principal_secret env var in protected container to store this value"
 }

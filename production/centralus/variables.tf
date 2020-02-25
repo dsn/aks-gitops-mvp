@@ -80,5 +80,6 @@ variable "cluster_tags" {
 
 # @todo remove this
 variable "random" {
-  type = string
+  type        = string
+  description = "change this in .tfvars to force trigger a new build on master"
 }

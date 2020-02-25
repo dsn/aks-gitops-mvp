@@ -17,6 +17,7 @@ jobs:
         with:
           tf_actions_version: 0.12.13
           tf_actions_subcommand: 'fmt'
+          tf_actions_working_dir: './production/centralus'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: 'Terraform Init'
@@ -24,7 +25,7 @@ jobs:
         with:
           tf_actions_version: 0.12.13
           tf_actions_subcommand: 'init'
-          tf_actions_working_dir: '.'
+          tf_actions_working_dir: './production/centralus'
           tf_actions_comment: true
           args: '-backend-config="./backend.tfvars"'
         env:
@@ -46,7 +47,7 @@ jobs:
         with:
           tf_actions_version: 0.12.13
           tf_actions_subcommand: 'apply'
-          tf_actions_working_dir: '.'
+          tf_actions_working_dir: './production/centralus'
           tf_actions_comment: true
           args: '-var-file="./terraform.tfvars"'
         env:

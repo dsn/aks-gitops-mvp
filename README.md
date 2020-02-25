@@ -1,6 +1,6 @@
-![validate-centralus-production](https://github.com/haisumb/aks-gitops-mvp/workflows/validate-centralus-production/badge.svg)
+![validate-centralus-production](https://github.com/haisumb/aks-gitops-mvp/workflows/validate-production-centralus/badge.svg)
 
-![apply-centralus-production](https://github.com/haisumb/aks-gitops-mvp/workflows/apply-centralus-production/badge.svg)
+![apply-centralus-production](https://github.com/haisumb/aks-gitops-mvp/workflows/apply-production-centralus/badge.svg)
 
 Getting Started
 ===============

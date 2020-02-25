@@ -1,4 +1,4 @@
-name: 'apply-centralus-production'
+name: 'apply-production-centralus'
 on:
   push:
     branches:

@@ -77,3 +77,8 @@ variable "cluster_tags" {
   default = {
   }
 }
+
+# @todo remove this
+variable "random" {
+  type = "string"
+}

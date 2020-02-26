@@ -3,7 +3,7 @@ on:
   pull_request:
     paths:
       - 'production/centralus/*'
-  push_request:
+  push:
     paths:
       - 'production/centralus/*'
 jobs:

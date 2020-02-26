@@ -63,7 +63,13 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   }
 
   role_based_access_control {
-    enabled = true
+    enabled = var.role_based_access_control_enabled
+
+    azure_active_directory {
+      client_app_id     = var.active_directory_client_app_id
+      server_app_id     = var.active_directory_server_app_id
+      server_app_secret = var.active_directory_server_app_secret
+    }
   }
 
   service_principal {
@@ -75,6 +81,10 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     oms_agent {
       enabled                    = var.oms_agent_enabled
       log_analytics_workspace_id = azurerm_log_analytics_workspace.workspace.id
+    }
+
+    azure_policy {
+      enabled = true
     }
   }
 

@@ -8,7 +8,7 @@ Getting Started
 Pre-Reqs
 -------------
 
-Before creating AKS cluster, we need a service account for accessing backend state and another service account for cluster itself. To store backend state in azure, we need an storage account, one storage access key and a container. Following instructions are for doing it with az cli command:s
+Before creating AKS cluster, we need a service account for accessing backend state and another service account for cluster itself. To store backend state in azure, we need an storage account, one storage access key and a container. Following instructions are for doing it with az cli command.
 
 ### Setup ENV vars:
 
@@ -157,6 +157,16 @@ cluster_name        = "centralus-production-aks"
 prefix              = "centralusproduction"
 ```
 
+### Setting up RBAC with Azure Active Directory
+
+Follow instructions on [Integrate Azure Active Directory with Azure Kubernetes Service using the Azure CLI](https://docs.microsoft.com/en-us/azure/aks/azure-ad-integration-cli) before "Deploy The Cluster" section. You should have client app id, server app id and server app secret once you are done with these instructions. Please export these values in following variables:
+
+```bash
+export TF_VAR_active_directory_client_app_id     = "..."
+export TF_VAR_active_directory_server_app_id     = "..."
+export TF_VAR_active_directory_server_app_secret = "..."
+```
+
 Running manifests for cluster creation
 -----------------------
 
@@ -186,3 +196,9 @@ You need at least following env vars for a pipeline:
 - TF_VAR_aks_service_principal_secret
 - TF_VAR_ssh_public_key
 - ARM_ACCESS_KEY
+
+You will also need following if you want to use RBAC with Azure AD:
+
+- TF_VAR_active_directory_client_app_id
+- TF_VAR_active_directory_server_app_id
+- TF_VAR_active_directory_server_app_secret

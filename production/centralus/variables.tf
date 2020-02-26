@@ -78,6 +78,42 @@ variable "cluster_tags" {
   }
 }
 
+variable "oms_agent_enabled" {
+  default     = "false"
+  description = "Enable Azure Monitoring for AKS"
+  type        = string
+}
+
+variable "azure_policy_enabled" {
+  default     = "false"
+  description = "Enable Azure Policy for AKS"
+  type        = string
+}
+
+
+variable "role_based_access_control_enabled" {
+  default     = "true"
+  description = "Enable Role Based Accesss Control for AKS"
+  type        = string
+}
+
+variable "active_directory_client_app_id" {
+  type        = string
+  description = "client_app_id for active directory integration"
+  default     = ""
+}
+
+variable "active_directory_server_app_id" {
+  type        = string
+  description = "server_app_id for active directory integration"
+  default     = ""
+}
+
+variable "active_directory_server_app_secret" {
+  type        = string
+  description = "directory_server_app_secret for active directory integration"
+}
+
 # @todo remove this
 variable "random" {
   type        = string

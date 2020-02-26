@@ -3,9 +3,6 @@ on:
   pull_request:
     paths:
       - 'production/centralus/*'
-  push:
-    paths:
-      - 'production/centralus/*'
 jobs:
   terraform:
     name: 'Terraform'

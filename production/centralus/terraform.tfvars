@@ -1,6 +1,10 @@
-resource_group_name = "gitops-rg-aks-mvp"
-cluster_name        = "centralus-production-aks"
-prefix              = "centralusproduction"
+resource_group_name               = "gitops-rg-aks-mvp"
+cluster_name                      = "centralus-production-aks"
+prefix                            = "centralusproduction"
+oms_agent_enabled                 = "true"
+azure_policy_enabled              = "true"
+role_based_access_control_enabled = "true"
+
 vnet_tags = {
   "billingcode" = "0"
   customer      = "boxboat"
@@ -18,4 +22,4 @@ cluster_tags = {
   project       = "internal"
 }
 # to force trigger a build
-random = "6"
+random = "7"

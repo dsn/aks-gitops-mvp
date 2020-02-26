@@ -60,3 +60,6 @@ jobs:
           TF_VAR_aks_service_principal_secret: ${{ secrets.TF_VAR_aks_service_principal_secret }}
           TF_VAR_ssh_public_key: ${{ secrets.TF_VAR_ssh_public_key }}
           ARM_ACCESS_KEY: ${{ secrets.ARM_ACCESS_KEY }}
+          TF_VAR_active_directory_client_app_id     : ${{ secrets.TF_VAR_active_directory_client_app_id      }}
+          TF_VAR_active_directory_server_app_id     : ${{ secrets.TF_VAR_active_directory_server_app_id      }}
+          TF_VAR_active_directory_server_app_secret : ${{ secrets.TF_VAR_active_directory_server_app_secret  }}

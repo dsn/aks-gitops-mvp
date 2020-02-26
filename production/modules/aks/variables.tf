@@ -142,9 +142,16 @@ variable "active_directory_server_app_id" {
 variable "active_directory_server_app_secret" {
   type        = string
   description = "directory_server_app_secret for active directory integration"
+  default     = ""
 }
 
 variable "subnet_id" {
   type        = string
   description = "subnet id for subnet in which pods will reside"
+}
+
+variable allowedContainerImagesRegex {
+  type        = string
+  description = "regex for allowed container images"
+  default     = "*"
 }

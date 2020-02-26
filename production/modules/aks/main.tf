@@ -3,6 +3,9 @@ data "azurerm_resource_group" "cluster" {
   name = var.resource_group_name
 }
 
+data "azurerm_subscription" "current" {
+}
+
 resource "random_id" "workspace" {
   keepers = {
     group_name = data.azurerm_resource_group.cluster.name
@@ -30,6 +33,7 @@ resource "azurerm_log_analytics_solution" "solution" {
     product   = "OMSGallery/ContainerInsights"
   }
 }
+
 
 resource "azurerm_kubernetes_cluster" "cluster" {
   name                = var.cluster_name
@@ -84,9 +88,29 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     }
 
     azure_policy {
-      enabled = true
+      enabled = var.azure_policy_enabled
     }
   }
 
   tags = var.tags
+}
+
+
+resource "azurerm_policy_assignment" "policy" {
+  count        = var.azure_policy_enabled ? 1 : 0
+  display_name = "Ensure only allowed container images in Kubernetes cluster"
+  name         = "${var.cluster_name}containerImagesPolicy"
+  not_scopes   = []
+  parameters = jsonencode(
+    {
+      allowedContainerImagesRegex = {
+        value = var.allowedContainerImagesRegex
+      }
+    }
+  )
+  # This is id of policy definition for allowed images in k8s cluster.
+  # List of possible policies can be found at https://portal.azure.com/#blade/Microsoft_Azure_Policy/PolicyMenuBlade/Definitions
+  # Filter the list with "kubernetes" to get aks specific policies
+  policy_definition_id = "/providers/Microsoft.Authorization/policyDefinitions/febd0533-8e55-448f-b837-bd0e06f16469"
+  scope                = data.azurerm_subscription.current.id
 }

@@ -13,6 +13,7 @@ module "aks" {
   subnet_id                          = module.vnet.subnet_id
   oms_agent_enabled                  = var.oms_agent_enabled
   azure_policy_enabled               = var.azure_policy_enabled
+  allowedContainerImagesRegex        = var.allowedContainerImagesRegex
   role_based_access_control_enabled  = var.role_based_access_control_enabled
   active_directory_server_app_secret = var.active_directory_server_app_secret
   active_directory_server_app_id     = var.active_directory_server_app_id

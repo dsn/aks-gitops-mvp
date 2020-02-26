@@ -1,6 +1,5 @@
-![validate-centralus-production](https://github.com/haisumb/aks-gitops-mvp/workflows/production-centralus-validate/badge.svg)
 
-![apply-centralus-production](https://github.com/haisumb/aks-gitops-mvp/workflows/production-centralus-apply/badge.svg)
+![production-centralus-apply](https://github.com/haisumb/aks-gitops-mvp/workflows/production-centralus-apply/badge.svg)
 
 Getting Started
 ===============
@@ -202,3 +201,17 @@ You will also need following if you want to use RBAC with Azure AD:
 - TF_VAR_active_directory_client_app_id
 - TF_VAR_active_directory_server_app_id
 - TF_VAR_active_directory_server_app_secret
+
+Azure Active Directory Integration
+---------------------------
+
+@todo
+
+unset KUBECONFIG
+az aks get-credentials --resource-group $RG_NAME --name "centralus-production-aks" --admin
+az aks get-credentials --resource-group $RG_NAME --name "centralus-production-aks" --overwrite-existing
+
+Azure Policy for AKS
+---------------------
+
+@todo

@@ -112,6 +112,13 @@ variable "active_directory_server_app_id" {
 variable "active_directory_server_app_secret" {
   type        = string
   description = "directory_server_app_secret for active directory integration"
+  default     = ""
+}
+
+variable allowedContainerImagesRegex {
+  type        = string
+  description = "regex for allowed container images"
+  default     = "*"
 }
 
 # @todo remove this

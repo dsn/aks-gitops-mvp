@@ -1,4 +1,4 @@
-name: 'production-centralus-apply'
+name: 'production-centralus-aks'
 on:
   push:
     branches:
@@ -36,7 +36,6 @@ jobs:
           tf_actions_version: 0.12.20
           tf_actions_subcommand: 'init'
           tf_actions_working_dir: './production/centralus'
-          tf_actions_comment: true
           args: '-backend-config="./backend.tfvars"'
         env:
           ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
@@ -88,7 +87,6 @@ jobs:
           tf_actions_version: 0.12.20
           tf_actions_subcommand: 'init'
           tf_actions_working_dir: './production/centralus/kubernetes'
-          tf_actions_comment: true
           args: '-backend-config="./backend.tfvars"'
         env:
           ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
@@ -102,8 +100,8 @@ jobs:
           tf_actions_working_dir: '.'
       - name: 'Terraform Apply - kubernetes'
         uses: hashicorp/terraform-github-actions@master
+        if: github.ref == 'master'
         with:
-          if: github.ref == 'master'
           tf_actions_version: 0.12.20
           tf_actions_subcommand: 'apply'
           tf_actions_comment: true

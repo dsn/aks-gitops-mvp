@@ -17,6 +17,7 @@ jobs:
       ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
       ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
       ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+      TF_VAR_aks_service_principal_id: ${{ secrets.TF_VAR_aks_service_principal_id }}
       TF_VAR_active_directory_client_app_id     : ${{ secrets.TF_VAR_active_directory_client_app_id      }}
       TF_VAR_active_directory_server_app_id     : ${{ secrets.TF_VAR_active_directory_server_app_id      }}
     steps:

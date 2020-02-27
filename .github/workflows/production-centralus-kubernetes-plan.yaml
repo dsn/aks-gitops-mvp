@@ -19,7 +19,6 @@ jobs:
       TF_VAR_active_directory_server_app_id     : ${{ secrets.TF_VAR_active_directory_server_app_id      }}
     steps:
       #### Once cluster is up and running, we want to create kubernetes resources in following
-
       - name: 'Terraform Format - kubernetes'
         uses: hashicorp/terraform-github-actions@master
         with:
@@ -33,9 +32,9 @@ jobs:
           tf_actions_working_dir: './production/centralus/kubernetes'
           tf_actions_comment: true
           args: '-backend-config="./backend.tfvars"'
-          env:
-            ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-            ARM_ACCESS_KEY: ${{ secrets.ARM_ACCESS_KEY }}
+        env:
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_ACCESS_KEY: ${{ secrets.ARM_ACCESS_KEY }}
       - name: 'Terraform Validate - kubernetes'
         uses: hashicorp/terraform-github-actions@master
         with:
@@ -51,7 +50,7 @@ jobs:
           tf_actions_working_dir: './production/centralus'
           tf_actions_comment: true
           args: '-var-file="./terraform.tfvars"'
-          env:
-            ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-            TF_VAR_active_directory_server_app_secret : ${{ secrets.TF_VAR_active_directory_server_app_secret  }}
-            ARM_ACCESS_KEY: ${{ secrets.ARM_ACCESS_KEY }}
+        env:
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          TF_VAR_active_directory_server_app_secret : ${{ secrets.TF_VAR_active_directory_server_app_secret  }}
+          ARM_ACCESS_KEY: ${{ secrets.ARM_ACCESS_KEY }}

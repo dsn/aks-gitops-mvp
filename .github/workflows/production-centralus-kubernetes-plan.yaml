@@ -5,7 +5,7 @@ name: 'production-centralus-kubernetes-plan'
 on:
   pull_request:
     paths:
-      - 'production/centralus/kubernetes'
+      - 'production/centralus/kubernetes/*'
 jobs:
   terraform:
     name: 'Terraform - Kubernetes Plan'

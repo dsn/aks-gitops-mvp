@@ -175,12 +175,6 @@ terraform init -backed-config=./backend.tfvars
 
 terraform apply -var-file=./terraform.tfvars
 
-Once cluster is created, a file names kube_config is written to ./output folder. You can run following to connect to newly created cluster:
-
-```bash
-export KUBECONFIG=$( pwd )/output/kube_config
-kubectl get pods
-```
 
 Env vars required for CD pipeline
 ----------------------
@@ -202,16 +196,84 @@ You will also need following if you want to use RBAC with Azure AD:
 - TF_VAR_active_directory_server_app_id
 - TF_VAR_active_directory_server_app_secret
 
-Azure Active Directory Integration
----------------------------
+Accessing the cluster with kubectl
+----------------------------------
 
-@todo
+Once cluster is created, a file names kube_config is written to ./output folder. You can run following to connect to newly created cluster:
 
+```bash
+export KUBECONFIG=$( pwd )/output/kube_config
+kubectl get pods
+```
+
+NOTE: This file is for admins and contains maximum privillege, it's not recommended to share this with everyone.
+
+### Using RBAC with Azure Active Directory to access cluster
+
+Create groups in Azure AD and add users to groups by following instructions at https://docs.microsoft.com/en-us/azure/aks/azure-ad-rbac.
+
+Once groups/users are setup in Azure AD, you need to create corresponding roles and role bindings in cluster. Use following command to get admin KUBECONFIG:
+
+```bash 
 unset KUBECONFIG
-az aks get-credentials --resource-group $RG_NAME --name "centralus-production-aks" --admin
-az aks get-credentials --resource-group $RG_NAME --name "centralus-production-aks" --overwrite-existing
+az aks get-credentials --resource-group "myAKSResourceGroup" --name "aks-cluster-name" --admin
+```
+A ClusterRole and ClusterRoleBinding are cluster level permissisons. Users in associated group will have permissions to perform all allowed actions on all allowed namespaces. If you want to restrict users to particular namespaces, use Role and RoleBinding. 
 
-Azure Policy for AKS
----------------------
+As an example, we will create a role for dev namespace with full privilleges. For more information and examples you can see https://docs.microsoft.com/en-us/azure/aks/azure-ad-rbac.
 
-@todo
+Create yaml file called role-dev-namespace.yaml and put following:
+
+```yaml
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: dev-user-full-access
+  namespace: dev
+rules:
+- apiGroups: ["", "extensions", "apps"]
+  resources: ["*"]
+  verbs: ["*"]
+- apiGroups: ["batch"]
+  resources:
+  - jobs
+  - cronjobs
+  verbs: ["*"]
+```
+Now run
+
+`kubectl apply -f role-dev-namespace.yaml`
+
+Get group id for the group you want to associate this role with, using following command:
+
+`az ad group show --group groupNameHere --query objectId -o tsv`
+
+ Create a file named rolebinding-dev-namespace.yaml and paste the following YAML manifest. On the last line, replace groupObjectId with the group object ID output from the previous command:
+
+```yaml
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: dev-user-access
+  namespace: dev
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: dev-user-full-access
+subjects:
+- kind: Group
+  namespace: dev
+  name: groupObjectId
+ ```
+
+ Now users in this group will be able to get a kubeconfig using following command:
+
+`az aks get-credentials --resource-group myResourceGroup --name myAKSCluster --overwrite-existing`
+
+Note: This replaces existing `~/.kube/config`. You can remove `--overwrite-existing` if you don't want that.
+
+Now, when user runs a command like:
+
+`kubectl run --generator=run-pod/v1 nginx-dev --image=nginx --namespace dev`
+
+It will ask to login on browser. Once done, command will succesfully run. 

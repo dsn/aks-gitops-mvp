@@ -16,14 +16,3 @@ provider "random" {
   version = "=2.2.1"
 }
 
-provider "kubernetes" {
-  version                = "=1.11"
-  host                   = module.aks.host
-  username               = module.aks.username
-  password               = module.aks.password
-  client_certificate     = module.aks.client_certificate
-  client_key             = module.aks.client_key
-  cluster_ca_certificate = module.aks.cluster_ca_certificate
-}
-
-

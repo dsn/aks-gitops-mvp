@@ -1,7 +1,7 @@
 # This workflow is triggered on changes in /kubernetes module on pull request
 # This will fail if kubernetes cluster is not yet created.
 # One successfull execution of terraform-apply is pre-req for this
-name: 'production-centralus-apply'
+name: 'production-centralus-kubernetes-plan'
 on:
   pull_request:
     paths:
@@ -19,18 +19,17 @@ jobs:
       TF_VAR_active_directory_server_app_id     : ${{ secrets.TF_VAR_active_directory_server_app_id      }}
     steps:
       #### Once cluster is up and running, we want to create kubernetes resources in following
-      - name: 'Terraform Format - kubernetes'
+      - name: 'Terraform Format'
         uses: hashicorp/terraform-github-actions@master
         with:
           tf_actions_version: 0.12.20
           tf_actions_subcommand: 'fmt'
-      - name: 'Terraform Init - kubernetes'
+      - name: 'Terraform Init'
         uses: hashicorp/terraform-github-actions@master
         with:
           tf_actions_version: 0.12.20
           tf_actions_subcommand: 'init'
           tf_actions_working_dir: './production/centralus/kubernetes'
-          tf_actions_comment: true
           args: '-backend-config="./backend.tfvars"'
         env:
           ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
@@ -42,7 +41,7 @@ jobs:
           tf_actions_subcommand: 'validate'
           tf_actions_comment: true
           tf_actions_working_dir: '.'
-      - name: 'Terraform Plan - kubernetes'
+      - name: 'Terraform Plan'
         uses: hashicorp/terraform-github-actions@master
         with:
           tf_actions_version: 0.12.20

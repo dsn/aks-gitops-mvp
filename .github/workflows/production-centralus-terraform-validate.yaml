@@ -72,7 +72,7 @@ jobs:
           tf_actions_subcommand: 'fmt'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: 'Terraform Init'
+      - name: 'Terraform Init - kubernetes'
         uses: hashicorp/terraform-github-actions@master
         with:
           tf_actions_version: 0.12.20

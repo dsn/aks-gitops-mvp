@@ -5,5 +5,5 @@ output "client_certificate" {
 
 output "kube_config" {
   sensitive = true
-  value     = module.aks.kube_config_raw
+  value     = module.aks.kube_config_file
 }

@@ -18,12 +18,14 @@ jobs:
       TF_VAR_active_directory_client_app_id     : ${{ secrets.TF_VAR_active_directory_client_app_id      }}
       TF_VAR_active_directory_server_app_id     : ${{ secrets.TF_VAR_active_directory_server_app_id      }}
     steps:
-      #### Once cluster is up and running, we want to create kubernetes resources in following
+      - name: 'Checkout'
+        uses: actions/checkout@master
       - name: 'Terraform Format'
         uses: hashicorp/terraform-github-actions@master
         with:
           tf_actions_version: 0.12.20
           tf_actions_subcommand: 'fmt'
+          tf_actions_working_dir: './production/centralus/kubernetes'
       - name: 'Terraform Init'
         uses: hashicorp/terraform-github-actions@master
         with:

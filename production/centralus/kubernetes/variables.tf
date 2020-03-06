@@ -21,6 +21,16 @@ variable "flux_syncGarbageCollection_enabled" {
   default     = "false"
 }
 
+variable "flux_chart_version" {
+  type    = string
+  default = "1.2.0"
+}
+
+variable "flux_helm_operator_chart_version" {
+  type    = string
+  default = "0.7.0"
+}
+
 # @todo remove this
 variable "random" {
   type        = string

@@ -24,6 +24,9 @@ data "azurerm_kubernetes_cluster" "main" {
 #   cluster_ca_certificate = "${base64decode(data.azurerm_kubernetes_cluster.main.kube_config.0.cluster_ca_certificate)}"
 # }
 
+provider "tls" {
+  version = "=2.1.1"
+}
 
 provider "kubernetes" {
   version                = "=1.10"

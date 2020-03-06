@@ -4,6 +4,7 @@ prefix                            = "centralusproduction"
 oms_agent_enabled                 = "true"
 azure_policy_enabled              = "true"
 role_based_access_control_enabled = "true"
+agent_vm_count                    = 3
 
 vnet_tags = {
   "billingcode" = "0"

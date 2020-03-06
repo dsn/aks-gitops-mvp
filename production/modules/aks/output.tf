@@ -35,7 +35,3 @@ output kube_admin_config_raw {
   sensitive = true
 }
 
-output kube_config_file {
-  value      = "${var.output_directory}/${var.kubeconfig_filename}"
-  depends_on = [local_file.cluster_credentials]
-}

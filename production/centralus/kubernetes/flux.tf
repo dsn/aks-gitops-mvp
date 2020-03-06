@@ -14,6 +14,7 @@ resource "helm_release" "fluxcd" {
   name       = "flux"
   repository = data.helm_repository.fluxcd.metadata[0].name
   chart      = "flux"
+  version    = "1.2.0"
   set {
     name  = "git.url"
     value = var.flux_git_url
@@ -34,6 +35,7 @@ resource "helm_release" "helm-operator" {
   name       = "helm-operator"
   repository = data.helm_repository.fluxcd.metadata[0].name
   chart      = "helm-operator"
+  version    = "0.7.0"
   set {
     name  = "git.ssh.secretName"
     value = "flux-git-deploy"

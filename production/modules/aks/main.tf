@@ -6,33 +6,33 @@ data "azurerm_resource_group" "cluster" {
 data "azurerm_subscription" "current" {
 }
 
-resource "random_id" "workspace" {
-  keepers = {
-    group_name = data.azurerm_resource_group.cluster.name
-  }
+# resource "random_id" "workspace" {
+#   keepers = {
+#     group_name = data.azurerm_resource_group.cluster.name
+#   }
 
-  byte_length = 8
-}
+#   byte_length = 8
+# }
 
-resource "azurerm_log_analytics_workspace" "workspace" {
-  name                = "k8s-workspace-${random_id.workspace.hex}"
-  location            = data.azurerm_resource_group.cluster.location
-  resource_group_name = data.azurerm_resource_group.cluster.name
-  sku                 = "PerGB2018"
-}
+# resource "azurerm_log_analytics_workspace" "workspace" {
+#   name                = "k8s-workspace-${random_id.workspace.hex}"
+#   location            = data.azurerm_resource_group.cluster.location
+#   resource_group_name = data.azurerm_resource_group.cluster.name
+#   sku                 = "PerGB2018"
+# }
 
-resource "azurerm_log_analytics_solution" "solution" {
-  solution_name         = "ContainerInsights"
-  location              = data.azurerm_resource_group.cluster.location
-  resource_group_name   = data.azurerm_resource_group.cluster.name
-  workspace_resource_id = azurerm_log_analytics_workspace.workspace.id
-  workspace_name        = azurerm_log_analytics_workspace.workspace.name
+# resource "azurerm_log_analytics_solution" "solution" {
+#   solution_name         = "ContainerInsights"
+#   location              = data.azurerm_resource_group.cluster.location
+#   resource_group_name   = data.azurerm_resource_group.cluster.name
+#   workspace_resource_id = azurerm_log_analytics_workspace.workspace.id
+#   workspace_name        = azurerm_log_analytics_workspace.workspace.name
 
-  plan {
-    publisher = "Microsoft"
-    product   = "OMSGallery/ContainerInsights"
-  }
-}
+#   plan {
+#     publisher = "Microsoft"
+#     product   = "OMSGallery/ContainerInsights"
+#   }
+# }
 
 
 resource "azurerm_kubernetes_cluster" "cluster" {

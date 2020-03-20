@@ -11,6 +11,7 @@ module "aks" {
   ssh_public_key                     = var.ssh_public_key
   tags                               = var.cluster_tags
   subnet_id                          = module.vnet.subnet_id
+  oms_agent_enabled                  = var.oms_agent_enabled
   azure_policy_enabled               = var.azure_policy_enabled
   allowedContainerImagesRegex        = var.allowedContainerImagesRegex
   role_based_access_control_enabled  = var.role_based_access_control_enabled

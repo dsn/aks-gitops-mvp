@@ -78,6 +78,12 @@ variable "cluster_tags" {
   }
 }
 
+variable "oms_agent_enabled" {
+  default     = "false"
+  description = "Enable Azure Monitoring for AKS"
+  type        = string
+}
+
 variable "azure_policy_enabled" {
   default     = "false"
   description = "Enable Azure Policy for AKS"

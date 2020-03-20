@@ -4,6 +4,7 @@ resource kubernetes_secret sealed-secrets-key {
     labels = {
       "sealedsecrets.bitnami.com/sealed-secrets-key" = "active"
     }
+    namespace = "kube-system"
   }
 
   data = {

@@ -1,3 +1,5 @@
 *.tfstate*
 .terraform
 kube_config
+*.pem
+*.key

@@ -13,7 +13,7 @@ data "azurerm_subscription" "current" {
 
 #   byte_length = 8
 # }
-
+#
 # resource "azurerm_log_analytics_workspace" "workspace" {
 #   name                = "k8s-workspace-${random_id.workspace.hex}"
 #   location            = data.azurerm_resource_group.cluster.location
